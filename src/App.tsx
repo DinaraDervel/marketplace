@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import FilteredProductTable from "./components/FilterableProductTable/FilteredProductTable";
+import { Provider } from "mobx-react";
+import ProductsStore from "./store/ProductsStore";
+
+const stores = {
+  productsStore: new ProductsStore(),
+};
+export type ProductsStoreType = typeof stores.productsStore;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <Provider {...stores}>
+        <FilteredProductTable productsStore={stores.productsStore} />
+      </Provider>
     </div>
   );
 }

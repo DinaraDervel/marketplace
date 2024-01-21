@@ -1,0 +1,36 @@
+.table {
+  text-decoration: none;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  & th {
+    font-weight: normal;
+    font-size: 14px;
+    color: #ffffff;
+    background-color: #354251;
+  }
+  & td {
+    font-size: 15px;
+    color: #354251;
+  }
+  & td,
+  & th {
+    white-space: pre-wrap;
+    padding: 10px 5px;
+    line-height: 15px;
+    vertical-align: middle;
+    border: 1px solid #354251;
+  }
+  & td > div {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    & img {
+      height: 100%;
+      width: auto;
+    }
+  }
+  & tr:hover {
+    background-color: #a5bfda;
+  }
+}
