@@ -1,10 +1,24 @@
-import { Product } from './../components/FilterableProductTable/ProductTable/ProductTable';
 import { makeAutoObservable } from "mobx";
 import { getAllProducts } from "../api/request";
 
-class ProductsStore {
+export type Product = {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    brand: string;
+    category: string;
+    thumbnail: string;
+    images: Array<string>;
+  };
+  
+export class ProductStore {
     products: Array<Product> = [];
-    brands: Array<string> = [];
+    brands: Set<string> = new Set([]);
+    selectedBrand: string | undefined = undefined;
     isLoading:boolean = false;
     error: string | null = null;
 
@@ -26,10 +40,13 @@ class ProductsStore {
     }
 
     getBrands() {
-        this.brands = this.products.map(product => product.brand);
+         let brands = new Set(this.products.map(product => product.brand));
+         this.brands = brands;
+    }
+
+    selectBrand(brand:string | undefined) {
+        this.selectedBrand=brand;
     }
 }
 
-
-export default ProductsStore;
 

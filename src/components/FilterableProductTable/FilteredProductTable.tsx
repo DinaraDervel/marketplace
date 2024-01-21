@@ -1,38 +1,41 @@
-import { inject, observer } from "mobx-react";
-import { useEffect, useState } from "react";
+import { observer } from "mobx-react";
+import { useEffect } from "react";
 import ProductBrandSelection from "./ProductBrandSelection/ProductBrandSelection";
 import ProductTable from "./ProductTable/ProductTable";
-import { ProductsStoreType } from "../../App";
+import { useStores } from "../../use-store";
 
-const FilteredProductTableinject = inject("productsStore")(
-  observer(({ productsStore }: { productsStore: ProductsStoreType }) => {
-    useEffect(() => {
-      if (!productsStore.isLoading) productsStore.load();
-      // eslint-disable-next-line
-    }, []);
+const FilteredProductTableinject = observer(() => {
+  const { productStore } = useStores();
 
-    useEffect(() => {
-      productsStore.load();
-      // eslint-disable-next-line
-    }, [productsStore.error]);
-
-    const [selectedBrand, setSelectedBrand] = useState(undefined);
-    function selectBrand(newBrand: string | undefined): void {
-      setSelectedBrand(undefined);
+  useEffect(() => {
+    if (!productStore.isLoading) {
+      productStore.load();
+      productStore.getBrands();
     }
+    // eslint-disable-next-line
+  }, []);
 
-    return (
-      <>
-        <ProductBrandSelection
-          selectedBrand={selectedBrand}
-          selectBrand={selectBrand}
-        />
-        <ProductTable
-          productArray={productsStore.products}
-          selectedBrand={selectedBrand}
-        />
-      </>
-    );
-  })
-);
+  useEffect(() => {
+    productStore.load();
+    productStore.getBrands();
+    // eslint-disable-next-line
+  }, [productStore.error]);
+
+  function selectBrand(type: string | undefined): void {
+    productStore.selectBrand(type);
+  }
+
+  return (
+    <>
+      <ProductBrandSelection
+        selectedBrand={productStore.selectedBrand}
+        selectBrand={selectBrand}
+      />
+      <ProductTable
+        productArray={productStore.products}
+        selectedBrand={productStore.selectedBrand}
+      />
+    </>
+  );
+});
 export default FilteredProductTableinject;

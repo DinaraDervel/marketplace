@@ -1,18 +1,5 @@
 import s from "./ProductTable.module.scss";
-
-export type Product = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: Array<string>;
-};
+import { Product } from "../../../store/ProductStore";
 
 function ProductRow({
   product: { brand, title, images, price },
@@ -23,6 +10,7 @@ function ProductRow({
 }) {
   return (
     <tr>
+      <td>{key}</td>
       <td>{brand}</td>
       <td>{title}</td>
       <td>
@@ -51,10 +39,12 @@ export default function ProductTable({
     : productArray.map((product) => (
         <ProductRow product={product} key={product.id} />
       ));
+
   return (
     <table className={s.table}>
       <thead>
         <tr>
+          <th>ID</th>
           <th>Brand</th>
           <th>Title</th>
           <th>Image</th>
