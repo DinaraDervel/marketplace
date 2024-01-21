@@ -1,13 +1,10 @@
 import s from "./ProductTable.module.scss";
 import { Product } from "../../../store/ProductStore";
+import { observer } from "mobx-react";
+import { useStores } from "../../../use-store";
 
-function ProductRow({
-  product: { brand, title, images, price },
-  key,
-}: {
-  product: Product;
-  key: number;
-}) {
+function ProductRow({ product, key }: { product: Product; key: number }) {
+  const { brand, title, images, price } = product;
   return (
     <tr>
       <td>{key}</td>
@@ -23,22 +20,19 @@ function ProductRow({
   );
 }
 
-export default function ProductTable({
-  productArray,
-  selectedBrand,
-}: {
-  productArray: Array<Product>;
-  selectedBrand: string | undefined;
-}) {
-  let rowsOfProducts = selectedBrand
-    ? productArray.map((product) =>
-        product.brand === selectedBrand ? (
+const ProductTable = observer(() => {
+  const { productStore } = useStores();
+
+  let rowsOfProducts =
+    productStore.selectedBrand !== "Not selected"
+      ? productStore.products.map((product) =>
+          product.brand === productStore.selectedBrand ? (
+            <ProductRow product={product} key={product.id} />
+          ) : undefined
+        )
+      : productStore.products.map((product) => (
           <ProductRow product={product} key={product.id} />
-        ) : undefined
-      )
-    : productArray.map((product) => (
-        <ProductRow product={product} key={product.id} />
-      ));
+        ));
 
   return (
     <table className={s.table}>
@@ -54,4 +48,6 @@ export default function ProductTable({
       <tbody>{rowsOfProducts}</tbody>
     </table>
   );
-}
+});
+
+export default ProductTable;

@@ -1,8 +1,8 @@
 import { observer } from "mobx-react";
 import { useEffect } from "react";
+import { useStores } from "../../use-store";
 import ProductBrandSelection from "./ProductBrandSelection/ProductBrandSelection";
 import ProductTable from "./ProductTable/ProductTable";
-import { useStores } from "../../use-store";
 
 const FilteredProductTableinject = observer(() => {
   const { productStore } = useStores();
@@ -31,11 +31,9 @@ const FilteredProductTableinject = observer(() => {
         selectedBrand={productStore.selectedBrand}
         selectBrand={selectBrand}
       />
-      <ProductTable
-        productArray={productStore.products}
-        selectedBrand={productStore.selectedBrand}
-      />
+      <ProductTable />
     </>
   );
 });
+
 export default FilteredProductTableinject;

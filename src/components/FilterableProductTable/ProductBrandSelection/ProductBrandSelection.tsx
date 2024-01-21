@@ -15,14 +15,15 @@ const ProductBrandSelection = observer(
       let target = event.target as HTMLInputElement;
       selectBrand(target.value);
     };
+
     return (
       <div className="dropdown">
         <label>
           Select brand
           <select onChange={handleChange} className="dropbtn">
-            <option value={undefined}>Not selected</option>
+            <option>Not selected</option>
             {Array.from(productStore.brands).map((brand) => (
-              <option value={brand}>{brand}</option>
+              <option>{brand}</option>
             ))}
           </select>
         </label>
