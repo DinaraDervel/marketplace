@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import "./ProductBrandSelection.module.scss";
+import s from "./ProductBrandSelection.module.scss";
 import { useStores } from "../../../use-store";
 
 type ProductBrandSelectionProps = {
@@ -13,14 +13,15 @@ const ProductBrandSelection = observer(
 
     const handleChange = (event: React.SyntheticEvent): void => {
       let target = event.target as HTMLInputElement;
-      selectBrand(target.value);
+      if (target.value !== "Not selected") selectBrand(target.value);
+      else selectBrand(undefined);
     };
 
     return (
-      <div className="dropdown">
+      <div className={s.wrapper}>
         <label>
-          Select brand
-          <select onChange={handleChange} className="dropbtn">
+          <span>Select brand:</span>
+          <select onChange={handleChange}>
             <option>Not selected</option>
             {Array.from(productStore.brands).map((brand) => (
               <option>{brand}</option>

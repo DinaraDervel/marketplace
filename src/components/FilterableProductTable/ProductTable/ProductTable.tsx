@@ -3,11 +3,11 @@ import { Product } from "../../../store/ProductStore";
 import { observer } from "mobx-react";
 import { useStores } from "../../../use-store";
 
-function ProductRow({ product, key }: { product: Product; key: number }) {
+function ProductRow({ product }: { product: Product }) {
   const { brand, title, images, price } = product;
   return (
     <tr>
-      <td>{key}</td>
+      {/* <td>{key}</td> */}
       <td>{brand}</td>
       <td>{title}</td>
       <td>
@@ -23,22 +23,19 @@ function ProductRow({ product, key }: { product: Product; key: number }) {
 const ProductTable = observer(() => {
   const { productStore } = useStores();
 
-  let rowsOfProducts =
-    productStore.selectedBrand !== "Not selected"
-      ? productStore.products.map((product) =>
-          product.brand === productStore.selectedBrand ? (
-            <ProductRow product={product} key={product.id} />
-          ) : undefined
-        )
-      : productStore.products.map((product) => (
-          <ProductRow product={product} key={product.id} />
-        ));
+  let rowsOfProducts = productStore.selectedBrand
+    ? productStore.products.map((product) =>
+        product.brand === productStore.selectedBrand ? (
+          <ProductRow product={product} />
+        ) : undefined
+      )
+    : productStore.products.map((product) => <ProductRow product={product} />);
 
   return (
     <table className={s.table}>
       <thead>
         <tr>
-          <th>ID</th>
+          {/* <th>ID</th> */}
           <th>Brand</th>
           <th>Title</th>
           <th>Image</th>
