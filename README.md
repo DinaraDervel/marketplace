@@ -20,8 +20,12 @@ Users can effortlessly filter products by brand, thanks to Mobx managing the fil
 The application is developed with a responsive design, ensuring compatibility across different devices and screen sizes. 
   </li>
 </ul>
+
+### Result
+<a href='https://dinaradervel.github.io/marketplace/'>App deployed to GitHub-Pages</a>
 <p align="center">
   <a href="https://skillicons.dev">
     <img src="https://skillicons.dev/icons?i=react,ts,html,scss" />
   </a>
 </p>
+
