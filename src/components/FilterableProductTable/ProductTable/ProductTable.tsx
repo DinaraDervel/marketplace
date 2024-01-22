@@ -7,14 +7,14 @@ function ProductRow({ product }: { product: Product }) {
   const { brand, title, images, price } = product;
   return (
     <tr>
-      <td>{brand}</td>
-      <td>{title}</td>
-      <td>
+      <td className={s.image}>
         <div>
           <img src={images[0]} alt="product"></img>
         </div>
       </td>
-      <td>{price}</td>
+      <td className={s.brand}>{brand}</td>
+      <td>{title}</td>
+      <td className={s.price}>{price}</td>
     </tr>
   );
 }
@@ -36,10 +36,10 @@ const ProductTable = observer(() => {
     <table className={s.table}>
       <thead>
         <tr>
+          <th></th>
           <th>Brand</th>
           <th>Title</th>
-          <th>Image</th>
-          <th>Price</th>
+          <th className={s.price}>Price</th>
         </tr>
       </thead>
       <tbody>{rowsOfProducts}</tbody>

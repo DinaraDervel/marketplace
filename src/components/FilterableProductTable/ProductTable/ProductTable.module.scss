@@ -1,13 +1,26 @@
 .table {
   text-decoration: none;
   border-collapse: collapse;
+  table-layout: auto;
   width: 100%;
-  text-align: center;
+  text-align: left;
+  .image {
+    text-align: center;
+    width: 25%;
+  }
+  .brand {
+    width: 25%;
+  }
+  .price {
+    text-align: right;
+    width: 10%;
+    padding-right: 1rem;
+  }
   & th {
     font-weight: normal;
     font-size: 14px;
-    color: #ffffff;
     background-color: #354251;
+    color: #ffffff;
   }
   & td {
     font-size: 15px;
@@ -15,15 +28,15 @@
   }
   & td,
   & th {
-    white-space: pre-wrap;
+    white-space: normal;
     padding: 10px 5px;
     line-height: 15px;
-    vertical-align: middle;
-    border: 1px solid #354251;
+    vertical-align: top;
+    border-bottom: 1px solid #354251;
   }
   & td > div {
     width: 100%;
-    height: 200px;
+    height: 100px;
     overflow: hidden;
     & img {
       height: 100%;
