@@ -7,7 +7,6 @@ function ProductRow({ product }: { product: Product }) {
   const { brand, title, images, price } = product;
   return (
     <tr>
-      {/* <td>{key}</td> */}
       <td>{brand}</td>
       <td>{title}</td>
       <td>
@@ -26,16 +25,17 @@ const ProductTable = observer(() => {
   let rowsOfProducts = productStore.selectedBrand
     ? productStore.products.map((product) =>
         product.brand === productStore.selectedBrand ? (
-          <ProductRow product={product} />
+          <ProductRow product={product} key={product.id} />
         ) : undefined
       )
-    : productStore.products.map((product) => <ProductRow product={product} />);
+    : productStore.products.map((product) => (
+        <ProductRow product={product} key={product.id} />
+      ));
 
   return (
     <table className={s.table}>
       <thead>
         <tr>
-          {/* <th>ID</th> */}
           <th>Brand</th>
           <th>Title</th>
           <th>Image</th>

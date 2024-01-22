@@ -15,7 +15,7 @@ const FilteredProductTable = observer(() => {
   useEffect(() => {
     productStore.getBrands();
     // eslint-disable-next-line
-  }, [productStore.isLoading]);
+  }, [productStore.products]);
 
   if (productStore.error) {
     return (

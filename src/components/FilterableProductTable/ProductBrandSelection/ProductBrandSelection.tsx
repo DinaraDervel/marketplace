@@ -13,8 +13,7 @@ const ProductBrandSelection = observer(
 
     const handleChange = (event: React.SyntheticEvent): void => {
       let target = event.target as HTMLInputElement;
-      if (target.value !== "Not selected") selectBrand(target.value);
-      else selectBrand(undefined);
+      selectBrand(target.value !== "Not selected" ? target.value : undefined);
     };
 
     return (
@@ -24,7 +23,7 @@ const ProductBrandSelection = observer(
           <select onChange={handleChange}>
             <option>Not selected</option>
             {Array.from(productStore.brands).map((brand) => (
-              <option>{brand}</option>
+              <option key={brand}>{brand}</option>
             ))}
           </select>
         </label>

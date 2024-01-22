@@ -35,14 +35,12 @@ export class ProductStore {
       })
       .catch((err) => {
         this.error = err;
-        console.log(this.error);
       })
       .finally(() => (this.isLoading = false));
   }
 
   getBrands() {
-    let brands = new Set(this.products.map((product) => product.brand));
-    this.brands = brands;
+    this.brands = new Set(this.products.map((product) => product.brand));
   }
 
   selectBrand(brand: string | undefined) {
