@@ -13,7 +13,7 @@ function ProductRow({ product }: { product: Product }) {
         </div>
       </td>
       <td className={s.brand}>{brand}</td>
-      <td>{title}</td>
+      <td className={s.title}>{title}</td>
       <td className={s.price}>{price}</td>
     </tr>
   );
@@ -36,9 +36,9 @@ const ProductTable = observer(() => {
     <table className={s.table}>
       <thead>
         <tr>
-          <th></th>
-          <th>Brand</th>
-          <th>Title</th>
+          <th className={s.image}></th>
+          <th className={s.brand}>Brand</th>
+          <th className={s.title}>Title</th>
           <th className={s.price}>Price</th>
         </tr>
       </thead>

@@ -11,6 +11,9 @@
   .brand {
     width: 25%;
   }
+  .title {
+    width: 40%;
+  }
   .price {
     text-align: right;
     width: 10%;
@@ -18,19 +21,19 @@
   }
   & th {
     font-weight: normal;
-    font-size: 14px;
+    font-size: 0.875rem;
     background-color: #354251;
     color: #ffffff;
   }
   & td {
-    font-size: 15px;
+    font-size: 0.938rem;
     color: #354251;
   }
   & td,
   & th {
     white-space: normal;
-    padding: 10px 5px;
-    line-height: 15px;
+    padding: 0.625rem 0.313rem;
+    line-height: 0.938rem;
     vertical-align: top;
     border-bottom: 1px solid #354251;
   }
@@ -45,5 +48,26 @@
   }
   & tr:hover {
     background-color: #a5bfda;
+  }
+
+  @media (max-width: 520px) {
+    .image {
+      width: 30%;
+    }
+    & td > div {
+      height: 50px;
+    }
+    & td,
+    & th {
+      font-size: 10px;
+    }
+  }
+  @media (max-width: 320px) {
+    .image {
+      width: 15%;
+    }
+    & td > div {
+      height: 20px;
+    }
   }
 }
