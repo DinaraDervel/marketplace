@@ -23,26 +23,41 @@ const ProductTable = observer(() => {
   const { productStore } = useStores();
 
   let rowsOfProducts = productStore.selectedBrand
-    ? productStore.products.map((product) =>
-        product.brand === productStore.selectedBrand ? (
-          <ProductRow product={product} key={product.id} />
-        ) : undefined
+    ? productStore.products.filter(
+        (product) => product.brand === productStore.selectedBrand
       )
-    : productStore.products.map((product) => (
-        <ProductRow product={product} key={product.id} />
-      ));
+    : productStore.products;
+
+  let rowsOfProductsRendered = rowsOfProducts.map((el) => (
+    <ProductRow product={el} key={el.id} />
+  ));
+
+  function sort(field: keyof Product) {
+    rowsOfProducts.sort((a, b) => {
+      if (a[field] < b[field]) return -1;
+      else if (a[field] > b[field]) return 1;
+      return 0;
+    });
+    console.log(rowsOfProducts);
+  }
 
   return (
     <table className={s.table}>
       <thead>
         <tr>
           <th className={s.image}></th>
-          <th className={s.brand}>Brand</th>
-          <th className={s.title}>Title</th>
-          <th className={s.price}>Price</th>
+          <th className={s.brand} onClick={() => sort("brand")}>
+            Brand
+          </th>
+          <th className={s.title} onClick={() => sort("title")}>
+            Title
+          </th>
+          <th className={s.price} onClick={() => sort("price")}>
+            Price
+          </th>
         </tr>
       </thead>
-      <tbody>{rowsOfProducts}</tbody>
+      <tbody>{rowsOfProductsRendered}</tbody>
     </table>
   );
 });
