@@ -17,6 +17,7 @@ export type Product = {
 
 export class ProductStore {
   products: Array<Product> = [];
+  rowsOfProducts: Array<Product> = [];
   brands: Set<string> = new Set([]);
   selectedBrand: string | undefined = undefined;
   isLoading: boolean = false;
@@ -32,6 +33,11 @@ export class ProductStore {
     getAllProducts()
       .then((response) => {
         this.products = response.products;
+        this.rowsOfProducts = this.selectedBrand
+          ? this.products.filter(
+              (product) => product.brand === this.selectedBrand
+            )
+          : this.products;
       })
       .catch((err) => {
         this.error = err;
@@ -45,5 +51,8 @@ export class ProductStore {
 
   selectBrand(brand: string | undefined) {
     this.selectedBrand = brand;
+    this.rowsOfProducts = this.selectedBrand
+      ? this.products.filter((product) => product.brand === this.selectedBrand)
+      : this.products;
   }
 }

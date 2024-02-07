@@ -22,23 +22,16 @@ function ProductRow({ product }: { product: Product }) {
 const ProductTable = observer(() => {
   const { productStore } = useStores();
 
-  let rowsOfProducts = productStore.selectedBrand
-    ? productStore.products.filter(
-        (product) => product.brand === productStore.selectedBrand
-      )
-    : productStore.products;
-
-  let rowsOfProductsRendered = rowsOfProducts.map((el) => (
+  let rowsOfProductsRendered = productStore.rowsOfProducts.map((el) => (
     <ProductRow product={el} key={el.id} />
   ));
 
   function sort(field: keyof Product) {
-    rowsOfProducts.sort((a, b) => {
+    productStore.rowsOfProducts.sort((a, b) => {
       if (a[field] < b[field]) return -1;
       else if (a[field] > b[field]) return 1;
       return 0;
     });
-    console.log(rowsOfProducts);
   }
 
   return (
