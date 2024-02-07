@@ -16,6 +16,9 @@ The central feature is a dynamic table displaying various product details, react
 <li><b>Brand Filtering:</b>
 Users can effortlessly filter products by brand, thanks to Mobx managing the filtering process. 
 </li>
+ <li><b> Sorting Options:</b>
+Users have the flexibility to sort the displayed products based on various parameters such as brand, title, or price. 
+   </li>
 <li><b>Responsive Design:</b>
 The application is developed with a responsive design, ensuring compatibility across different devices and screen sizes. 
   </li>
